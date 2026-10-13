@@ -1,0 +1,114 @@
+:::Benchmark on tauri codebase:::
+
+Prompt:-Map the architecture of the Tauri application from its frontend entry points through the Rust backend, commands, state management, services, persistence, and responses to the UI.
+
+Requirements:
+
+Identify the main entry points and important modules.
+Trace at least three representative end-to-end execution paths, where the codebase supports them.
+Identify Tauri IPC commands and their frontend callers.
+Trace important function calls, shared state, asynchronous execution, error handling, and data transformations.
+Identify the principal configuration files and external dependencies.
+Use Layer structural-navigation tools in MODE A when appropriate; use ordinary navigation tools in MODE B.
+Produce a Mermaid architecture diagram.
+Cite concrete file paths, symbols, and line numbers where possible.
+Identify five important architectural risks, explaining the evidence and confidence for each.
+Do not modify source files for this task.
+
+Acceptance criteria:
+
+Architecture claims are supported by source evidence.
+At least three meaningful execution paths are documented if available.
+The diagram reflects the actual implementation rather than an assumed architecture.
+Risks are distinguished from confirmed defects.
+
+Benchmark using layer:-
+
+
+┌──────────┬───────────────┬───────────┬───────────┬────────────┬─────────────┬─────────────┬─────────────┬────────────┐
+│ Date     │ Models        │     Input │    Output │  Reasoning │       Cache │  Cache Read │       Total │ Cost (USD) │
+│          │               │           │           │            │      Create │             │      Tokens │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ 2026     │ - gpt-6-luna  │    83,030 │     4,703 │        463 │           0 │     209,664 │     297,397 │      $0.01 │
+│ 10-13    │               │           │           │            │             │             │             │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ Total    │               │    83,030 │     4,703 │        463 │           0 │     209,664 │     297,397 │      $0.01 │
+└──────────┴───────────────┴───────────┴───────────┴────────────┴─────────────┴─────────────┴─────────────┴────────────┘
+
+Benchmark without layer:-
+
+┌──────────┬───────────────┬───────────┬───────────┬────────────┬─────────────┬─────────────┬─────────────┬────────────┐
+│ Date     │ Models        │     Input │    Output │  Reasoning │       Cache │  Cache Read │       Total │ Cost (USD) │
+│          │               │           │           │            │      Create │             │      Tokens │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ 2026     │ - gpt-6-luna  │    77,128 │     8,620 │      1,338 │           0 │     637,696 │     723,444 │      $0.02 │
+│ 10-13    │               │           │           │            │             │             │             │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ Total    │               │    77,128 │     8,620 │      1,338 │           0 │     637,696 │     723,444 │      $0.02 │
+└──────────┴───────────────┴───────────┴───────────┴────────────┴─────────────┴─────────────┴─────────────┴────────────┘
+
+Promt 2:-Implement a useful, realistic feature in the existing Tauri application.
+
+Requirements:
+
+Explore the existing codebase and identify a meaningful feature or improvement that fits the application's current functionality.
+Trace the relevant frontend components, Rust backend modules, Tauri commands, state management, and persistence mechanisms before implementing the change.
+Follow existing architectural patterns, coding conventions, and error-handling practices.
+Reuse existing functionality wherever possible and avoid unnecessary dependencies or unrelated refactoring.
+Implement the feature end to end, including frontend interactions, backend logic, data validation, and persistence where applicable.
+Ensure frontend-to-backend communication, command arguments, return types, and error handling are correct.
+Handle relevant edge cases, loading states, and failure scenarios.
+Add or update tests to cover the new functionality and important edge cases.
+Run relevant tests, formatting, linting, type checks, and build checks available in the repository.
+Review the final changes for regressions, incomplete integrations, security issues, and unnecessary complexity.
+Cite concrete file paths, symbols, and line numbers where appropriate.
+Do not modify unrelated functionality or overwrite existing user changes.
+If the repository already contains an obvious, meaningful bug, you may fix it instead of adding a new feature, provided the fix is appropriately scoped.
+Acceptance criteria:
+
+The chosen task provides genuine value to the existing application.
+The implementation integrates correctly with the existing architecture.
+All relevant frontend and backend changes are complete.
+Existing behavior remains intact, except where a deliberate bug fix changes it.
+Tests and available verification commands are executed, with failures documented honestly.
+No unnecessary dependencies, abstractions, or unrelated changes are introduced.
+The final response summarizes the implemented feature or fix, changed files, important implementation decisions, verification results, and remaining limitations.
+Inspect the repository first, choose the most appropriate task independently, and implement it fully. Make reasonable engineering decisions without asking for approval for routine implementation details. Do not stop at a plan or a proposed solution. 
+
+Benchmark using layer:
+
+┌──────────┬───────────────┬───────────┬───────────┬────────────┬─────────────┬─────────────┬─────────────┬────────────┐
+│ Date     │ Models        │     Input │    Output │  Reasoning │       Cache │  Cache Read │       Total │ Cost (USD) │
+│          │               │           │           │            │      Create │             │      Tokens │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ 2026     │ - gpt-6-luna  │    54,110 │     7,988 │      4,095 │           0 │     619,776 │     681,874 │      $0.02 │
+│ 10-13    │               │           │           │            │             │             │             │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ Total    │               │    54,110 │     7,988 │      4,095 │           0 │     619,776 │     681,874 │      $0.02 │
+└──────────┴───────────────┴───────────┴───────────┴────────────┴─────────────┴─────────────┴─────────────┴────────────┘
+
+task-outcome:-Implemented channel sequence-index validation in core.ts (/C:/Users/junai/downloads/tauri-dev/tauri-dev/packages/api/src/core.ts:143). The API now ignores indexes that are not safe integers or are behind the next expected message, preventing stale entries from accumulating in the reorder buffer.
+
+Added an end-to-end regression case in core.spec.ts (/C:/Users/junai/downloads/tauri-dev/tauri-dev/packages/api-e2e/test/specs/core.spec.ts:86). It injects invalid and stale indexes, then checks that real Rust streamed messages still arrive.
+
+Verification: I attempted the API TypeScript check, lint, build, E2E TypeScript check, and Prettier check, but pnpm is unavailable. Corepack could not initialize because it was blocked from writing its cache, and the checkout has no node_modules, so those checks and the E2E test could not run. No Rust files were changed.
+  Worked for 2m 13s • 9:49 PM
+
+Without using Layer:-
+
+┌──────────┬───────────────┬───────────┬───────────┬────────────┬─────────────┬─────────────┬─────────────┬────────────┐
+│ Date     │ Models        │     Input │    Output │  Reasoning │       Cache │  Cache Read │       Total │ Cost (USD) │
+│          │               │           │           │            │      Create │             │      Tokens │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ 2026     │ - gpt-6-luna  │   139,639 │    11,321 │      5,277 │           0 │   1,882,112 │   2,033,072 │      $0.04 │
+│ 10-13    │               │           │           │            │             │             │             │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ Total    │               │   139,639 │    11,321 │      5,277 │           0 │   1,882,112 │   2,033,072 │      $0.04 │
+└──────────┴───────────────┴───────────┴───────────┴────────────┴─────────────┴─────────────┴─────────────┴────────────┘
+
+task outcome:- Implemented a security fix in the API example’s console. Previously, App.svelte rendered command and event output with {@html}, which could interpret returned text as executable markup. The console now stores each message and timestamp as data and renders them with Svelte’s escaped text interpolation. Message formatting also falls back to String(value) when JSON serialization fails.
+
+Changed App.svelte (/C:/Users/junai/Downloads/tauri-dev/tauri-dev/examples/api/src/App.svelte:118).
+
+Verification: The API example production build passed, and its TypeScript check passed. cargo fmt --all -- --check passed. The Rust check stalled while fetching a pinned Git dependency, so I stopped it. The build logged a blocked Google Fonts fetch but still completed successfully. I didn’t add a focused test: this example has no frontend unit-test setup, and its end-to-end suite requires a running Tauri app.
+  Worked for 6m 40s • 10:01 PM
