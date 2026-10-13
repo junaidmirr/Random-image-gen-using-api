@@ -1,0 +1,50 @@
+prompt: Map the architecture of the Tauri application from its frontend entry points through the Rust backend, commands, state management, services, persistence, and responses to the UI.
+
+Requirements:
+
+Identify the main entry points and important modules.
+Trace at least three representative end-to-end execution paths, where the codebase supports them.
+Identify Tauri IPC commands and their frontend callers.
+Trace important function calls, shared state, asynchronous execution, error handling, and data transformations.
+Identify the principal configuration files and external dependencies.
+Use Layer structural-navigation tools in MODE A when appropriate; use ordinary navigation tools in MODE B.
+Produce a Mermaid architecture diagram.
+Cite concrete file paths, symbols, and line numbers where possible.
+Identify five important architectural risks, explaining the evidence and confidence for each.
+Do not modify source files for this task.
+
+Acceptance criteria:
+
+Architecture claims are supported by source evidence.
+At least three meaningful execution paths are documented if available.
+The diagram reflects the actual implementation rather than an assumed architecture.
+Risks are distinguished from confirmed defects.
+
+benchmark:
+
+without layer:
+┌──────────┬───────────────┬───────────┬───────────┬────────────┬─────────────┬─────────────┬─────────────┬────────────┐
+│ Session  │ Models        │     Input │    Output │  Reasoning │       Cache │  Cache Read │       Total │ Cost (USD) │
+│          │               │           │           │            │      Create │             │      Tokens │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ 2026/10… │ - gpt-6-luna  │    51,802 │     6,588 │        907 │           0 │     463,104 │     521,494 │      $0.01 │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ Total    │               │    51,802 │     6,588 │        907 │           0 │     463,104 │     521,494 │      $0.01 │
+└──────────┴───────────────┴───────────┴───────────┴────────────┴─────────────┴─────────────┴─────────────┴────────────┘
+
+with layer:
+┌──────────┬───────────────┬───────────┬───────────┬────────────┬─────────────┬─────────────┬─────────────┬────────────┐
+│ Session  │ Models        │     Input │    Output │  Reasoning │       Cache │  Cache Read │       Total │ Cost (USD) │
+│          │               │           │           │            │      Create │             │      Tokens │            │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ 2026/10… │ - gpt-6-luna  │    97,127 │     7,327 │      1,619 │           0 │     607,744 │     712,198 │      $0.02 │
+├──────────┼───────────────┼───────────┼───────────┼────────────┼─────────────┼─────────────┼─────────────┼────────────┤
+│ Total    │               │    97,127 │     7,327 │      1,619 │           0 │     607,744 │     712,198 │      $0.02 │
+└──────────┴───────────────┴───────────┴───────────┴────────────┴─────────────┴─────────────┴─────────────┴────────────┘
+
+agent feedback: 
+You’re right: my Layer-first approach cost more in this comparison—about 712k total tokens versus 521k without Layer, roughly 37% higher. So for this task, it did not save tokens.
+
+I overused it: get_tree exposed a huge monorepo listing, and some Layer results were broad or truncated. The tools helped find symbols and callers, but ordinary navigation could have handled this architecture map more efficiently once the example app was identified.
+
+Benchmarks may show savings for targeted symbol lookups, but that didn’t translate to this broad task. I should have used a hybrid approach: a narrow file listing and a few targeted Layer lookups, then ordinary line reads for the app paths and configuration.
